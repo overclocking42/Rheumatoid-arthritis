@@ -374,8 +374,6 @@ with tab4:
         st.markdown("""
         - **Task**: 3-class classification (Healthy/Seropositive/Seronegative)
         - **Validation Macro-F1**: 85.77%
-        - **Target**: 85-90%
-        - **Status**: ✅ Target Met
         - **Features**: Age, Gender, RF, Anti-CCP, CRP, ESR
         """)
     
