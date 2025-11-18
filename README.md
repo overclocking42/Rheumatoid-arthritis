@@ -1,16 +1,17 @@
 # Rheumatoid Arthritis Diagnosis System - Quick Start
 
-For data access, the full data folder is available at [google-drive](https://drive.google.com/drive/folders/1vP4q1CzZiUh1e1OyM84okWWBBQDayGhj?usp=sharing) add that to the project root folder if needed.
 
 > **For comprehensive technical documentation**, see **[PROJECT_INFO.md](PROJECT_INFO.md)**
 
 ---
 
+For data access, the full data folder is available at [google-drive](https://drive.google.com/drive/folders/1vP4q1CzZiUh1e1OyM84okWWBBQDayGhj?usp=sharing) add that to the project root folder if needed.
+
 ## 🚀 Quick Start
 
 ### Run the Dashboard
 ```bash
-# From project root directory
+# From project root directory 
 streamlit run src/app/app_medical_dashboard.py
 ```
 
