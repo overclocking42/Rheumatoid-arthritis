@@ -14,7 +14,6 @@ For data access, the full data folder is available at [google-drive](https://dri
 streamlit run src/app/app_medical_dashboard.py
 ```
 
-Opens at `http://localhost:8501`
 
 **Three tabs**:
 1. **Lab Assessment**: Input 6 biomarkers → Get RA diagnosis
@@ -320,8 +319,8 @@ Opens at `http://localhost:8501`
 **To clone and run on another machine:**
 ```bash
 # 1. Clone repository
-git clone https://github.com/YOUR_USERNAME/ra-diagnosis-system.git
-cd ra-diagnosis-system
+git clone https://github.com/maxQterminal/Rheumatoid-arthritis.git
+cd Rheumatoid-arthritis
 
 # 2. Install dependencies
 pip install -r requirements.txt
@@ -330,7 +329,6 @@ pip install -r requirements.txt
 streamlit run src/app/app_medical_dashboard.py
 ```
 
-**That's it!** No paths to update, no files to move. The app finds everything automatically.
 
 ---
 
