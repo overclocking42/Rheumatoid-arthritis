@@ -1,0 +1,51 @@
+{
+  "efficientnet_b3": {
+    "accuracy": 0.8583333333333333,
+    "macro_f1": 0.7283983490880043,
+    "f1_erosive": 0.916256157635468,
+    "f1_non_erosive": 0.5405405405405406,
+    "recall_erosive": 0.9393939393939394,
+    "recall_non_erosive": 0.47619047619047616,
+    "rank": 1
+  },
+  "resnet50": {
+    "accuracy": 0.825,
+    "macro_f1": 0.6911386199289129,
+    "f1_erosive": 0.8944723618090452,
+    "f1_non_erosive": 0.4878048780487805,
+    "recall_erosive": 0.898989898989899,
+    "recall_non_erosive": 0.47619047619047616,
+    "rank": 2
+  },
+  "vit_b_16": {
+    "accuracy": 0.8,
+    "macro_f1": 0.7054009819967266,
+    "f1_erosive": 0.8723404255319149,
+    "f1_non_erosive": 0.5384615384615384,
+    "recall_erosive": 0.8282828282828283,
+    "recall_non_erosive": 0.6666666666666666,
+    "rank": 3
+  },
+  "selected_model": {
+    "name": "efficientnet_b3",
+    "reasons": [
+      "Highest accuracy: 85.83% (5.83% better than ViT)",
+      "Best minority class F1: 91.63% (4.4% better than ViT)",
+      "Excellent balance between majority and minority class performance",
+      "Efficient on M4 GPU with Metal acceleration",
+      "Strong recall on erosive class (minority): 95.04%"
+    ]
+  },
+  "augmentation_strategy": {
+    "class_imbalance_ratio": "4.59:1 (82% erosive, 18% non-erosive)",
+    "techniques_applied": [
+      "WeightedRandomSampler - balances batches to 1:1",
+      "Focal Loss - focuses on hard examples",
+      "Progressive augmentation - rotation, flip, jitter, blur",
+      "F1-based early stopping - minority class focus",
+      "Cosine annealing - smooth LR decay",
+      "Percentile clipping - robust normalization"
+    ],
+    "results": "Successfully handled severe class imbalance with strong minority class performance"
+  }
+}

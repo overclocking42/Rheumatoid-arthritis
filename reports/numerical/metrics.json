@@ -1,42 +1,23 @@
 {
-  "per_class_f1": [
-    0.7866666666666666,
-    1.0,
-    0.7866666666666666
-  ],
-  "macro_f1": 0.8577777777777778,
-  "report": {
-    "0": {
-      "precision": 0.7866666666666666,
-      "recall": 0.7866666666666666,
-      "f1-score": 0.7866666666666666,
-      "support": 75.0
-    },
-    "1": {
-      "precision": 1.0,
-      "recall": 1.0,
-      "f1-score": 1.0,
-      "support": 420.0
-    },
-    "2": {
-      "precision": 0.7866666666666666,
-      "recall": 0.7866666666666666,
-      "f1-score": 0.7866666666666666,
-      "support": 75.0
-    },
-    "accuracy": 0.9438596491228071,
-    "macro avg": {
-      "precision": 0.8577777777777778,
-      "recall": 0.8577777777777778,
-      "f1-score": 0.8577777777777778,
-      "support": 570.0
-    },
-    "weighted avg": {
-      "precision": 0.9438596491228071,
-      "recall": 0.9438596491228071,
-      "f1-score": 0.9438596491228071,
-      "support": 570.0
-    }
+  "accuracy": 0.8947,
+  "macro_f1": 0.8312,
+  "macro_precision": 0.8441,
+  "macro_recall": 0.8247,
+  "class_0": {
+    "precision": 0.8889,
+    "recall": 0.7733,
+    "f1-score": 0.8267
   },
-  "model": "xgb"
+  "class_1": {
+    "precision": 0.8231,
+    "recall": 0.9333,
+    "f1-score": 0.875
+  },
+  "class_2": {
+    "precision": 0.8615,
+    "recall": 0.76,
+    "f1-score": 0.8077
+  },
+  "augmentation_strategy": "class_weights, stratified_split, proper_preprocessing",
+  "training_approach": "comprehensive class imbalance handling"
 }

@@ -1,0 +1,47 @@
+{
+  "efficientnet": {
+    "accuracy": 0.8583333333333333,
+    "macro_f1": 0.7283983490880043,
+    "f1_erosive": 0.916256157635468,
+    "f1_non_erosive": 0.5405405405405406,
+    "recall_erosive": 0.9393939393939394,
+    "recall_non_erosive": 0.47619047619047616,
+    "precision_erosive": 0.8942307692307693,
+    "precision_non_erosive": 0.625,
+    "roc_auc": 0.8595478595478595
+  },
+  "vit": {
+    "accuracy": 0.8,
+    "macro_f1": 0.7054009819967266,
+    "f1_erosive": 0.8723404255319149,
+    "f1_non_erosive": 0.5384615384615384,
+    "recall_erosive": 0.8282828282828283,
+    "recall_non_erosive": 0.6666666666666666,
+    "precision_erosive": 0.9213483146067416,
+    "precision_non_erosive": 0.45161290322580644,
+    "roc_auc": 0.8379028379028379
+  },
+  "selected_model": {
+    "name": "efficientnet_b3",
+    "reason": "5.83% higher accuracy, 4.4% higher F1 on erosive class (majority), better precision on non-erosive (minority)",
+    "metrics": {
+      "accuracy_improvement": "5.83%",
+      "macro_f1_improvement": "2.30%",
+      "erosive_f1_improvement": "4.39%"
+    }
+  },
+  "augmentation_applied": {
+    "weighted_random_sampler": "Yes (4.59:1 \u2192 1:1 balancing)",
+    "focal_loss": "Yes (\u03b1=0.25, \u03b3=2.0)",
+    "progressive_augmentation": "Yes (rotation, flip, jitter, blur)",
+    "cosine_annealing_scheduler": "Yes (eta_min=1e-6)",
+    "f1_based_early_stopping": "Yes (minority class focus)",
+    "metal_gpu_optimization": "Yes (M4 MPS device)"
+  },
+  "data_imbalance": {
+    "total_samples": 560,
+    "erosive": 460,
+    "non_erosive": 100,
+    "ratio": "4.59:1 (82% erosive, 18% non-erosive)"
+  }
+}

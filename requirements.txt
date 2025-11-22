@@ -1,39 +1,87 @@
-# Core ML & Data
-numpy>=2.2.0
-pandas>=2.2.0
-scikit-learn>=1.4.0
-scipy>=1.14.0
+# ==================== DEEP LEARNING CORE ====================
+# PyTorch Framework (core dependencies)
 
-# Deep Learning (PyTorch)
-torch>=2.0.0
-torchvision>=0.15.0
 
-# Gradient Boosting
-xgboost>=2.0.0
 
-# Image Processing
-Pillow>=11.0.0
-opencv-python>=4.8.0
+**Next Step**: Send your friends this file or the GitHub link!**Status**: Ready to Share ✅**Generated**: November 22, 2025  ---- Treatment need urgency- Disease severity- Presence of erosions- Early signs of RA**This system helps detect**:- Bone erosions = permanent damage- Early detection → better treatment- Causes inflammation, pain, swelling- Body attacks joint tissue**Rheumatoid Arthritis (RA)** is an autoimmune disease where:## 🏥 Medical Context (Optional)---- ✅ Could help real patients- ✅ Easy to modify and extend- ✅ All code is documented- ✅ Production-ready code- ✅ Faster than human radiologist- ✅ Combines 2 types of data (smart!)- ✅ Uses AI to detect bone erosions (early disease)- ✅ Works on Mac, Windows, Linux## 🎉 Cool Facts---4. **Portability**: Read `PORTABILITY_GUIDE.md`3. **Problems**: See `TROUBLESHOOTING.md`2. **How does it work**: Read `PROJECT_INFO.md`1. **Setup questions**: Check `SETUP_GUIDE.md`## 📞 Need Help?---If all ✅, **you're good to go!**- [ ] See diagnosis and confidence scores- [ ] Gets predictions in <1 second- [ ] Can upload an X-ray image- [ ] Can upload a CSV file- [ ] Can see the web interface- [ ] Browser opens to http://localhost:8501After running the 3 setup commands:## ✅ Quick Checklist---3. That's it! They can use it immediately.   ```   pip install -r requirements.txt && streamlit run src/app/app.py   cd Rheumatoid-arthritis   git clone https://github.com/maxQterminal/Rheumatoid-arthritis.git   ```bash2. Tell them: "Run these 3 commands:"1. GitHub link**Just send them**:## 🤝 Sharing With Others---2. Options: Streamlit Cloud, AWS, Azure, Docker1. Read `PORTABILITY_GUIDE.md`### If You Want to Deploy Online:3. Run `python src/models/train_augmented.py`2. Update `data/` folder1. Get X-ray and blood test data### If You Want to Retrain Models:3. Check `src/models/` (training code)2. Look at `src/app/app.py` (the main code)1. Read `PROJECT_INFO.md` (explains everything)### If You Want to Understand the Code:## 🎓 Learning More---```→ Treatment: Start DMARD therapy→ Recommendation: Immediate rheumatology referral✓ Erosion: PRESENT (bone damage detected)✓ Risk: HIGH✓ Diagnosis: SEROPOSITIVE RA (Confident)```**System Output**:```X-ray: Shows bone damage... other tests ...Anti-CCP: 180 (positive for RA)RF: 250 (positive for RA)ESR: 38 (high inflammation)CRP: 45 (high inflammation)BMI: 26Age: 52```**Patient Data Input**:## 💡 Real-World Example---→ PROJECT_INFO.md + PORTABILITY_GUIDE.md + TROUBLESHOOTING.md**For Deployment/Production** (1+ hour):→ PROJECT_INFO.md (complete technical specs)**For Understanding How It Works** (30 min):→ README.md + SETUP_GUIDE.md**For Using the App** (15 min):→ README.md + this file**For Quick Understanding** (5 min):## 📚 Documentation Levels---**Fix**: All models are in `models/` folder. Make sure you cloned the full repo including large files.### Model file missing**Fix**: Run `streamlit run src/app/app.py --server.port 8502`### "Port 8501 already in use"- Windows: Install NVIDIA GPU drivers for speedup- Mac: Will auto-use Metal GPU**Fix**: It's using CPU. Don't worry, it still works, just slower.### App runs slow**Fix**: Run `pip install -r requirements.txt` again### "ModuleNotFoundError: No module named 'torch'"## 🐛 Common Issues---| Old Laptop | 🐢 2-5 seconds | Acceptable || Modern CPU | 🐢 1-2 seconds | Good || Windows NVIDIA GPU | ⚡ 180ms | Optimal || Mac M4 (GPU) | ⚡ 250ms | Optimal ||---------|-------|---------|| Setting | Speed | Quality |## ⚡ Performance---```    └── raw_data/imaging/        ← X-ray training data    ├── train_numeric.csv        ← Blood test training data└── data/                         ← Sample data││   └── resnet50.pth, vit.pth    ← Alternative models│   ├── xgb_model.joblib         ← Blood test model│   ├── efficientnet.pth         ← Best X-ray model (41 MB)├── models/                       ← Pre-trained AI models││   └── visualizations/          ← Analysis plots│   ├── models/                  ← Training scripts│   ├── app/app.py               ← The web UI you use├── src/                          ← Source code│├── PORTABILITY_GUIDE.md          ← Setup for different computers├── requirements.txt              ← All Python packages├── PROJECT_INFO.md               ← Full technical docs (1,259 lines)├── README.md                     ← You start hereproject/```## 📁 Project Structure---```Output (diagnosis + confidence)    ↓Post-processing (combine results)    ↓Model Inference (AI prediction)    ↓Preprocessing (normalize, resize)    ↓Raw Data (CSV + Image)```### Data Pipeline| ViT-B/16 | X-ray analysis | 80.00% | 328 MB || ResNet50 | X-ray analysis | 82.50% | 90 MB || **EfficientNet-B3** | X-ray analysis | 85.83% | 41 MB ⭐ BEST || XGBoost | Blood tests classification | 89.28% | 578 KB ||-------|---------|----------|-----------|| Model | Purpose | Accuracy | File Size |### Models Used- **Framework**: PyTorch (deep learning) + XGBoost (ML)- **Speed**: <500ms total prediction- **Accuracy**: 89% (blood) + 86% (imaging)- **2 Models**: XGBoost (blood tests) + EfficientNet-B3 (X-ray)### Architecture## 📊 The Technical Side (For Developers/ML People)---```╚════════════════════════════════════════════════════════════════╝║  └────────────────────────────────────────────────────────┘   ║║  │  • Follow-up in 4-6 weeks                             │   ║║  │  • Rheumatology referral                              │   ║║  │  • DMARD therapy                                      │   ║║  │ Recommendation:                                       │   ║║  │                                                        │   ║║  │ Confidence: 78%                                       │   ║║  │ DIAGNOSIS: SEROPOSITIVE RA ✓                          │   ║║  ┌────────────────────────────────────────────────────────┐   ║║  PREDICTION OUTPUT:                                            ║║                                                                ║║  └────────────────────────────────────────────────────────┘   ║║  │ [📤 Upload CSV]  [🔮 Predict]                         │   ║║  │                                                        │   ║║  │ Glucose:    [95]                                      │   ║║  │ Albumin:    [3.8]                                     │   ║║  │ WBC:        [7.5]   (White Blood Cells)              │   ║║  │ Hemoglobin: [14.2]                                    │   ║║  │ Platelet:   [250]                                     │   ║║  │ Anti-CCP:   [100]   (Specific RA Antibody)           │   ║║  │ RF:         [150]   (Rheumatoid Factor)               │   ║║  │ ESR:        [25]    (Inflammation Marker)             │   ║║  │ CRP:        [12.3]  (C-Reactive Protein)              │   ║║  │ BMI:        [28.5]                                     │   ║║  │ Age:        [45]                                       │   ║║  ┌────────────────────────────────────────────────────────┐   ║║  LAB RESULTS TAB:                                              ║║                                                                ║║  [📋 Lab Results]  [🖼️ X-ray Analysis]  [📊 Combined Results] ║║                                                                ║║           CLINICAL RA ASSESSMENT SYSTEM                        ║╔════════════════════════════════════════════════════════════════╗```## 🖥️ What You See When It Opens---Opens in browser automatically. That's it! ✅```streamlit run src/app/app.py# 3. Run itpip install -r requirements.txt# 2. Install dependenciescd Rheumatoid-arthritisgit clone https://github.com/maxQterminal/Rheumatoid-arthritis.git# 1. Get the code```bash**Windows/Mac/Linux - All the Same:**## 🚀 Setup (3 Commands - Any Computer)---- Confidence: How sure the AI is (e.g., 95%)- Erosion status: Non-Erosive / Erosive (bone damage)- Diagnosis: Healthy / Seropositive / SeronegativeIt gives you:**This AI system combines both** to predict: "Does this patient have RA (Rheumatoid Arthritis)?"2. **Hand X-ray image** (showing if bones are damaged)1. **Blood test results** (numbers like cholesterol, inflammation markers, etc.)Imagine you're a doctor with a patient. You have:## 🎯 What This Project Does (Simple Explanation)---**TL;DR**: This is an AI system that predicts Rheumatoid Arthritis from blood tests + X-rays. Super portable, just clone and run. 3 commands.# NOTE: For optimal performance, install with GPU/Metal support:
+#   Mac (M1/M2/M3/M4): pip install torch torchvision --default-index https://download.pytorch.org/whl/stable
+#   Windows/Linux NVIDIA: pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+#   CPU Only: pip install torch torchvision (included below)
+torch==2.0.1
+torchvision==0.15.2
+torchaudio==2.0.2
 
-# Web Framework (Optional - only if deploying Flask API)
-Flask>=3.0.0
-Flask-Cors>=4.0.0
-requests>=2.30.0
+# ==================== MACHINE LEARNING ====================
+# XGBoost: Gradient boosting for numeric (blood test) classification
+xgboost==2.0.0
 
-# Model Serialization
-joblib>=1.3.0
+# Scikit-learn: ML utilities (metrics, preprocessing, cross-validation)
+scikit-learn==1.3.2
 
-# Web UI (Primary - Streamlit Dashboard)
-streamlit>=1.28.0
+# SciPy: Scientific computing (optimization, statistics)
+scipy==1.11.4
 
-# Visualization (for evaluation dashboard)
-matplotlib>=3.7.0
-seaborn>=0.13.0
+# ==================== DATA PROCESSING ====================
+# Pandas: Data manipulation, CSV I/O, dataframe operations
+pandas==2.0.3
 
-# Configuration & Environment
-python-dotenv>=1.0.0
+# NumPy: Numerical computing, array operations
+numpy==1.24.3
 
-# Note: PyTorch versions may need manual installation:
-# CPU: pip install torch torchvision
-# GPU (CUDA 12.1): pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
-# More: https://pytorch.org/get-started/locally/
+# ==================== IMAGE PROCESSING ====================
+# Pillow: Image loading, manipulation, I/O
+Pillow==10.0.0
+
+# OpenCV: Advanced image processing (resizing, color conversion, etc.)
+opencv-python==4.8.1.78
+
+# ==================== WEB UI & DASHBOARD ====================
+# Streamlit: Interactive web dashboard (PRIMARY UI)
+streamlit==1.28.1
+
+# Requests: HTTP client for API calls and data fetching
+requests==2.31.0
+
+# ==================== MODEL SERIALIZATION ====================
+# Joblib: Save/load ML models (XGBoost, preprocessing pipelines)
+joblib==1.3.2
+
+# ==================== VISUALIZATION ====================
+# Matplotlib: Core plotting library
+matplotlib==3.8.0
+
+# Seaborn: Statistical data visualization (builds on matplotlib)
+seaborn==0.13.0
+
+# ==================== UTILITIES ====================
+# python-dotenv: Environment variable management (.env files)
+python-dotenv==1.0.0
+
+# tqdm: Progress bars for training/processing
+tqdm==4.66.1
+
+# ==================== OPTIONAL: EXPLAINABILITY ====================
+# SHAP: Feature importance and model interpretability
+shap==0.42.3
+
+# ==================== DEPLOYMENT (OPTIONAL) ====================
+# Gunicorn: WSGI HTTP server for production deployment
+gunicorn==21.2.0
+
+# ==================== DEVELOPMENT (OPTIONAL) ====================
+# Black: Code formatting
+black==23.10.1
+
+# Pylint: Code linting
+pylint==3.0.3
+
+# Pytest: Unit testing framework
+pytest==7.4.3
+
+# ==================== NOTES ====================
+# 1. All versions pinned for reproducibility
+# 2. Python 3.9+ required
+# 3. GPU/Metal setup instructions above
+# 4. Install with: pip install -r requirements.txt
+# 5. Create venv first: python3 -m venv venv && source venv/bin/activate (macOS/Linux)
+#                      python -m venv venv && venv\Scripts\activate (Windows)

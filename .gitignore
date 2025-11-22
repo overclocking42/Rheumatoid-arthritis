@@ -3,7 +3,7 @@
 
 # Backup directory
 backups/
-data/
+data_all/
 
 # Python
 __pycache__/

@@ -1,0 +1,34 @@
+{
+  "training_date": "2025-11-22",
+  "augmentation_strategy": "Comprehensive (weighted sampling, focal loss, LR scheduling)",
+  "models": {
+    "numeric": {
+      "name": "XGBoost Classifier",
+      "accuracy": 0.8947,
+      "macro_f1": 0.8312,
+      "class_imbalance_ratio": "5.59:1",
+      "handling": "class_weights, stratified_split"
+    },
+    "efficientnet": {
+      "name": "EfficientNet-B3",
+      "accuracy": 0.85,
+      "f1_score": 0.7823,
+      "minority_recall": 0.619,
+      "class_imbalance_ratio": "4.60:1",
+      "handling": "weighted_sampling, focal_loss, LR_scheduling"
+    },
+    "vit": {
+      "name": "Vision Transformer B/16",
+      "accuracy": 0.8333,
+      "f1_score": 0.7655,
+      "minority_recall": 0.5714,
+      "class_imbalance_ratio": "4.60:1",
+      "handling": "weighted_sampling, focal_loss, LR_scheduling"
+    }
+  },
+  "improvements": {
+    "numeric": "+0.19pp accuracy, +0.78pp F1",
+    "efficientnet": "+1.33pp accuracy, +6.17pp minority recall",
+    "vit": "+1.11pp accuracy from baseline"
+  }
+}

@@ -1,28 +1,38 @@
 # Rheumatoid Arthritis Diagnosis System - Quick Start
 
-
 > **For comprehensive technical documentation**, see **[PROJECT_INFO.md](PROJECT_INFO.md)**
 
----
+-------
+Imaging Data:
 
-For data access, the full data folder is available at [google-drive](https://drive.google.com/drive/folders/1vP4q1CzZiUh1e1OyM84okWWBBQDayGhj?usp=sharing) add that to the project root folder if needed.
+tags:
+- X-ray
+- Wrist
+- Segmentation
+- Classification
+license: bigscience-openrail-m
 
-## 🚀 Quick Start
+# Dataset Card for RAM-W600
+Benchmark code is available in <https://github.com/maxQterminal/Rheumatoid-arthritis>.
 
-### Run the Dashboard
+## Download
+Please run the following command to download RAM-W600:
+
 ```bash
-# From project root directory 
-streamlit run src/app/app_medical_dashboard.py
+git clone https://huggingface.co/datasets/TokyoTechMagicYang/RAM-W600
 ```
 
+Numerical Data: [data](https://github.com/maxQterminal/Rheumatoid-arthritis/data/numerical/numeric)
+--------
 
-**Three tabs**:
+
+**Four tabs**:
 1. **Lab Assessment**: Input 6 biomarkers → Get RA diagnosis
 2. **X-ray Analysis**: Upload hand X-ray → Get erosion classification  
 3. **Combined Results**: See both predictions together
-4. **Model Performance**: View model accuracy and selection rationale
+4. **Model Performance**: View model accuracy, comparison, and augmentation strategy
 
-**Important**: Models are already in `models/` folder. No additional setup needed!
+**Important**: Models are already in `models/` folder (EfficientNet-B3, XGBoost). No additional setup needed!
 
 ---
 
@@ -30,7 +40,7 @@ streamlit run src/app/app_medical_dashboard.py
 
 **Input**: Blood tests (6 biomarkers) + Hand X-ray image  
 **Output**: RA diagnosis (Healthy / Seropositive / Seronegative) + Erosion status  
-**Accuracy**: 89% (blood tests) + 84.17% (X-ray with optimized threshold)
+**Accuracy**: 89% (blood tests) + 85.83% (X-ray with augmentation strategy)
 
 ---
 
@@ -44,18 +54,18 @@ streamlit run src/app/app_medical_dashboard.py
 ├─────────────────────────────────────────────────────────────────────────┤
 │                                                                         │
 │  Tab 1: Lab Assessment              Tab 2: X-ray Analysis               │
-│  ┌─────────────────────────┐       ┌─────────────────────────-─┐        │
-│  │ Input 6 Biomarkers:     │       │ Upload Hand X-ray Image:  │        │
-│  │ • Age (years)           │       │ • JPG/PNG/BMP format      │        │
-│  │ • Gender (M/F)          │       │ • 224×224 or larger       │        │
-│  │ • RF (IU/mL)            │       │                           │        │
-│  │ • Anti-CCP (IU/mL)      │       │ Click: "Analyze X-ray"    │        │
-│  │ • CRP (mg/L)            │       │                           │        │
-│  │ • ESR (mm/hr)           │       │                           │        │
-│  │                         │       │                           │        │
-│  │ Click: "Get Diagnosis"  │       │                           │        │
-│  └─────────────────────────┘       └──────────────────────────-┘        │
-│            ↓                                 ↓                          │
+│  ┌─────────────────────────┐       ┌──────────────────────────┐         │
+│  │ Input 6 Biomarkers:     │       │ Upload Hand X-ray Image: │         │
+│  │ • Age (years)           │       │ • JPG/PNG/BMP format     │         │
+│  │ • Gender (M/F)          │       │ • 224×224 or larger      │         │
+│  │ • RF (IU/mL)            │       │                          │         │
+│  │ • Anti-CCP (IU/mL)      │       │ Click: "Analyze X-ray"   │         │
+│  │ • CRP (mg/L)            │       │                          │         │
+│  │ • ESR (mm/hr)           │       │                          │         │
+│  │                         │       │                          │         │
+│  │ Click: "Get Diagnosis"  │       │                          │         │
+│  └─────────────────────────┘       └──────────────────────────┘         │
+│            ↓                                 ↓                          │ 
 └─────────────────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────────────────┐
@@ -66,10 +76,10 @@ streamlit run src/app/app_medical_dashboard.py
 │  ─────────────────────────       ─────────────────────                  │
 │  Input: [Age, Gender, RF, ...]   Input: Image pixels                    │
 │         ↓                                ↓                              │
-│  1. StandardScaler normalization  1. Resize to 224×224                  │
-│     (subtract mean, divide by std) 2. Convert to 3-channel RGB          │
-│         ↓                           3. Apply ImageNet normalization     │
-│  Normalized values ready           ↓                                    │
+│  1. StandardScaler normalization   1. Resize to 224×224                 │
+│    (subtract mean, divide by std)  2. Convert to 3-channel RGB          │
+│         ↓                          3. Apply ImageNet normalization      │
+│  Normalized values ready                  ↓                             │
 │  for model input                   Preprocessed image ready             │
 │                                    for model input                      │
 │                                                                         │
@@ -77,74 +87,73 @@ streamlit run src/app/app_medical_dashboard.py
 │                                                                         │
 └─────────────────────────────────────────────────────────────────────────┘
 
-┌─────────────────────────────────────────────────────────────────────────┐
-│                     MODEL INFERENCE (Prediction)                        │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                         │
-│  PATH 1: Numeric Model              PATH 2: Imaging Model               │
-│  ─────────────────────────          ──────────────────────              │
-│  Preprocessed biomarkers             Preprocessed image                 │
-│           ↓                                  ↓                          │
-│    ┌──────────────┐              ┌──────────────────┐                   │
-│    │   XGBoost    │              │ EfficientNet-B3  │                   │
-│    │   Classifier │              │     CNN          │                   │
-│    │ (100 trees)  │              │  (10.3M params)  │                   │    
-│    └──────────────┘              └──────────────────┘                   │    
-│           ↓                                  ↓                          │
-│   Multiclass Output:              Binary Output:                        │
-│   P(Healthy) = 0.15               P(Erosive) = 0.72                     │
-│   P(Seroneg) = 0.25               (72% confident)                       │
-│   P(Seropos) = 0.60 ← Max                 ↓                             │
-│           ↓                       Decision Threshold = 0.35             │
-│           ↓                       Since 0.72 > 0.35:                    │
-│   Prediction:                     Predict: "EROSIVE"                    │
-│   "SEROPOSITIVE"                          ↓                             │
-│   (60% confident)                 Confidence = 0.72                     │
-│                                                                         │
-└─────────────────────────────────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────-──────────────────┐
+│                     MODEL INFERENCE (Prediction)                     │
+├──────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│  PATH 1: Numeric Model              PATH 2: Imaging Model            │
+│  ─────────────────────────          ──────────────────────           │
+│  Preprocessed biomarkers             Preprocessed image              │
+│           ↓                                  ↓                       │
+│    ┌──────────────┐              ┌──────────────────┐                │
+│    │   XGBoost    │              │ EfficientNet-B3  │                │
+│    │   Classifier │              │     CNN          │                │
+│    │ (100 trees)  │              │  (10.3M params)  │                │
+│    └──────────────┘              └──────────────────┘                │
+│           ↓                                  ↓                       │
+│   Multiclass Output:              Binary Output:                     │
+│   P(Healthy) = 0.15               P(Erosive) = 0.72                  │
+│   P(Seroneg) = 0.25               (72% confident)                    │
+│   P(Seropos) = 0.60 ← Max         Threshold: 0.5 (default)           │
+│           ↓                       Since 0.72 > 0.5:                  │
+│           ↓                       Predict: "EROSIVE"                 │
+│   Prediction:                                                        │
+│   "SEROPOSITIVE"                  Confidence = 0.72                  │
+│   (60% confident)                          ↓                         │
+└──────────────────────────────────────────────────────────────────────┘
 
-┌─────────────────────────────────────────────────────────────────────────┐
-│                     USER OUTPUT (UI Display)                            │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                         │
-│  Lab Assessment Tab Shows:       X-ray Analysis Tab Shows:              │
-│  ┌──────────────────────┐       ┌──────────────────────┐                │
-│  │ Diagnosis Result:    │       │ X-ray Classification:│                │
-│  │ ✓ SEROPOSITIVE RA    │       │ ✓ EROSIVE            │                │
-│  │                      │       │                      │                │
-│  │ Confidence: 60%      │       │ Confidence: 72%      │                │
-│  │                      │       │ Decision: Threshold  │                │
-│  │ Breakdown:           │       │          = 0.35      │                │
-│  │ • P(Healthy) = 15%   │       │                      │                │
-│  │ • P(Seroneg) = 25%   │       │ Interpretation:      │                │
-│  │ • P(Seropos) = 60%   │       │ "Joint erosions      │                │
-│  │                      │       │  are present"        │                │
-│  │ Clinical Action:     │       │                      │                │
-│  │ → Start DMARD        │       │ Clinical Action:     │                │
-│  │   therapy            │       │ → Confirm with       │                │
-│  │ → Monitor closely    │       │   radiologist        │                │
-│  │ → Follow-up in 6 wks │       │ → Adjust treatment   │                │
-│  └──────────────────────┘       └──────────────────────┘                │
-│                                                                         │
-│  Combined Results Tab Shows:                                            │
-│  ┌──────────────────────────────────────────┐                           │
-│  │ OVERALL RA DIAGNOSIS SUMMARY             │                           │
-│  │                                          │                           │
-│  │ Blood Tests: SEROPOSITIVE (60%)          │                           │
-│  │ Hand X-rays: EROSIVE (72%)               │                           │
-│  │                                          │                           │
-│  │ Combined Assessment:                     │                           │
-│  │ ✓ HIGH RA LIKELIHOOD                     │                           │
-│  │   - Positive autoimmune markers          │                           │
-│  │   - Visible joint erosions               │                           │
-│  │                                          │                           │
-│  │ Recommendation:                          │                           │
-│  │ → Advanced RA suspected                  │                           │
-│  │ → Aggressive treatment indicated         │                           │
-│  │ → Consider rheumatology referral         │                           │
-│  └──────────────────────────────────────────┘                           │
-│                                                                         │
-└─────────────────────────────────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────────────────────────┐
+│                     USER OUTPUT (UI Display)                          │
+├───────────────────────────────────────────────────────────────────────┤
+│                                                                       │
+│  Lab Assessment Tab Shows:       X-ray Analysis Tab Shows:            │
+│  ┌──────────────────────┐       ┌──────────────────────┐              │
+│  │ Diagnosis Result:    │       │ X-ray Classification:│              │
+│  │ ✓ SEROPOSITIVE RA    │       │ ✓ EROSIVE            │              │
+│  │                      │       │                      │              │
+│  │ Confidence: 60%      │       │ Confidence: 72%      │              │
+│  │                      │       │ Decision: Threshold  │              │
+│  │ Breakdown:           │       │          = 0.35      │              │
+│  │ • P(Healthy) = 15%   │       │                      │              │
+│  │ • P(Seroneg) = 25%   │       │ Interpretation:      │              │
+│  │ • P(Seropos) = 60%   │       │ "Joint erosions      │              │
+│  │                      │       │  are present"        │              │
+│  │ Clinical Action:     │       │                      │              │
+│  │ → Start DMARD        │       │ Clinical Action:     │              │
+│  │   therapy            │       │ → Confirm with       │              │
+│  │ → Monitor closely    │       │   radiologist        │              │
+│  │ → Follow-up in 6 wks │       │ → Adjust treatment   │              │
+│  └──────────────────────┘       └──────────────────────┘              │
+│                                                                       │
+│  Combined Results Tab Shows:                                          │
+│  ┌──────────────────────────────────────────┐                         │
+│  │ OVERALL RA DIAGNOSIS SUMMARY             │                         │
+│  │                                          │                         │
+│  │ Blood Tests: SEROPOSITIVE (60%)          │                         │ 
+│  │ Hand X-rays: EROSIVE (72%)               │                         │
+│  │                                          │                         │
+│  │ Combined Assessment:                     │                         │
+│  │ ✓ HIGH RA LIKELIHOOD                     │                         │
+│  │   - Positive autoimmune markers          │                         │
+│  │   - Visible joint erosions               │                         │
+│  │                                          │                         │
+│  │ Recommendation:                          │                         │
+│  │ → Advanced RA suspected                  │                         │
+│  │ → Aggressive treatment indicated         │                         │
+│  │ → Consider rheumatology referral         │                         │
+│  └──────────────────────────────────────────┘                         │
+│                                                                       │
+└───────────────────────────────────────────────────────────────────────┘
 ```
 
 ### Data Flow Summary
@@ -182,7 +191,9 @@ data/raw_data/
 
 models/
 ├── xgb_model.joblib           (1.1 MB - blood test classifier)
-└── EfficientNet-B3_best.pth   (43.3 MB - X-ray classifier)
+├── efficientnet.pth           (41.3 MB - X-ray classifier - PRIMARY MODEL)
+├── resnet50.pth               (41.3 MB - X-ray classifier - alternative)
+└── vit.pth                    (328 MB - X-ray classifier - alternative)
 
 src/
 ├── app/
@@ -196,6 +207,34 @@ src/
 
 ## 🤖 Models
 
+### 2. Imaging Models: Three CNNs with Augmentation Strategy
+
+**Problem Solved**: Severe class imbalance (4.59:1 - 82% Erosive vs 18% Non-Erosive)
+
+**Solution Applied**:
+- **WeightedRandomSampler**: Balances batch-level sampling to 1:1 ratio
+- **Focal Loss** (γ=2.0): Focuses training on hard-to-learn minority class examples
+- **Progressive Augmentation**: Flips, rotations ±15°, color jitter, Gaussian blur
+- **F1-based Early Stopping**: Monitors erosive class F1 (not validation loss)
+- **Optimized for M4 Metal GPU**: Float32 dtype, batch size 16
+
+**Model Comparison** (all trained with identical augmentation pipeline):
+
+| Model | Accuracy | F1 Erosive | F1 Non-Erosive | Status |
+|-------|----------|-----------|----------------|--------|
+| **EfficientNet-B3** | **85.83%** | **91.63%** | **54.05%** | ✅ **PRIMARY** |
+| ResNet50 | 82.50% | 89.45% | 48.78% | Alternative |
+| ViT-B/16 | 80.00% | 87.23% | 53.85% | Alternative |
+
+**Selected Model: EfficientNet-B3**
+- Highest overall accuracy (85.83%, +5.83pp vs ViT)
+- Best minority class F1 (54.05%, handles early RA detection)
+- Optimal erosive recall (95.04%, catches most erosion cases)
+- Fast inference (200-500 ms) vs ViT (slower, larger memory)
+- See `reports/image/model_comparison_all_models.png` for visualizations
+
+---
+
 ### 1. Numeric Model: XGBoost
 - **Input**: 6 blood test biomarkers
 - **Output**: Healthy / Seropositive RA / Seronegative RA
@@ -204,16 +243,6 @@ src/
 - **ROC-AUC**: 93.21%
 - **Speed**: 15-50 ms
 - **Why this model**: Best for tabular data, fast, interpretable, handles mixed feature types
-
-### 2. Imaging Model: EfficientNet-B3
-- **Input**: 224×224 hand X-ray image
-- **Output**: Erosive / Non-erosive
-- **Accuracy**: 84.17% ✅ (improved from 77.94% after optimising threshold)
-- **ROC-AUC**: 89.18%
-- **F1-Score**: 72.06%
-- **Speed**: 200-500 ms
-- **Why selected**: Best balance between detecting both classes (vs ViT: 91.39% ROC but only 53% F1)
-- **Optimization**: Threshold tuned to 0.35 for improved accuracy
 
 ---
 
@@ -321,15 +350,16 @@ Opens at `http://localhost:8501`
 ```bash
 # 1. Clone repository
 git clone https://github.com/maxQterminal/Rheumatoid-arthritis.git
-cd Rheumatoid-arthritis
+cd ra-diagnosis-system
 
 # 2. Install dependencies
 pip install -r requirements.txt
 
 # 3. Run app (works immediately, no configuration needed!)
-streamlit run src/app/app_medical_dashboard.py
+streamlit run src/app/app.py
 ```
 
+**That's it!** No paths to update, no files to move. The app finds everything automatically.
 
 ---
 
