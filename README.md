@@ -350,7 +350,7 @@ Opens at `http://localhost:8501`
 ```bash
 # 1. Clone repository
 git clone https://github.com/maxQterminal/Rheumatoid-arthritis.git
-cd ra-diagnosis-system
+cd Rheumatoid-arthritis
 
 # 2. Install dependencies
 pip install -r requirements.txt
