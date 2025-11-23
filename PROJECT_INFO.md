@@ -54,56 +54,56 @@ Build an AI-powered **Rheumatoid Arthritis (RA) Diagnosis System** combining two
 │                          src/app/app.py                                 │
 ├─────────────────────────────────────────────────────────────────────────┤
 │                                                                         │
-│  Tab 1: Lab Results              Tab 2: X-ray Analysis                │
-│  (6 Biomarkers Input)            (Image Upload)                       │
-│           ↓                               ↓                            │
+│  Tab 1: Lab Results              Tab 2: X-ray Analysis                  │
+│  (6 Biomarkers Input)            (Image Upload)                         │
+│           ↓                               ↓                             │
 ├─────────────────────────────────────────────────────────────────────────┤
 │                    PREPROCESSING & VALIDATION LAYER                     │
-│                   (Data Normalization & Image Processing)              │
+│                   (Data Normalization & Image Processing)               │
 │                                                                         │
-│  Path A: Numeric Preprocessing    Path B: Image Preprocessing         │
-│  • StandardScaler normalization   • Resize to 224×224                 │
-│  • Feature validation             • Grayscale→RGB conversion          │
-│  • Range checking                 • Percentile clipping (0.5-99.5%)  │
-│  • Missing value handling         • ImageNet normalization            │
-│         ↓                                 ↓                            │
+│  Path A: Numeric Preprocessing    Path B: Image Preprocessing           │
+│  • StandardScaler normalization   • Resize to 224×224                   │
+│  • Feature validation             • Grayscale→RGB conversion            │
+│  • Range checking                 • Percentile clipping (0.5-99.5%)     │
+│  • Missing value handling         • ImageNet normalization              │
+│         ↓                                 ↓                             │
 ├─────────────────────────────────────────────────────────────────────────┤
 │                        MODEL INFERENCE LAYER                            │
 │                                                                         │
-│  Model A: XGBoost (Numeric)       Model B: EfficientNet-B3 (Imaging)  │
-│  • 100 boosted decision trees     • 74 layers CNN                      │
-│  • 6 input features               • 41M parameters                     │
-│  • 3-class output                 • 2-class output                     │
-│  • Inference: 50-100ms            • Inference: 200-300ms              │
-│         ↓                                 ↓                            │
-│  [P(Healthy), P(Seropos),         [P(Non-Erosive), P(Erosive)]       │
-│   P(Seroneg)]                                                          │
-│         ↓                                 ↓                            │
+│  Model A: XGBoost (Numeric)       Model B: EfficientNet-B3 (Imaging)    │
+│  • 100 boosted decision trees     • 74 layers CNN                       │
+│  • 6 input features               • 41M parameters                      │
+│  • 3-class output                 • 2-class output                      │
+│  • Inference: 50-100ms            • Inference: 200-300ms                │
+│         ↓                                 ↓                             │
+│  [P(Healthy), P(Seropos),         [P(Non-Erosive), P(Erosive)]          │
+│   P(Seroneg)]                                                           │
+│         ↓                                 ↓                             │
 ├─────────────────────────────────────────────────────────────────────────┤
 │                      DECISION & OUTPUT LAYER                            │
 │                                                                         │
-│  • Select max probability class   • Apply threshold decision           │
-│  • Generate confidence scores     • Calculate erosion probability      │
-│  • Format clinical interpretation • Combine with numeric results       │
+│  • Select max probability class   • Apply threshold decision            │
+│  • Generate confidence scores     • Calculate erosion probability       │
+│  • Format clinical interpretation • Combine with numeric results        │
 │                                                                         │
-│         Diagnosis Output                   X-ray Result               │
-│  ┌─────────────────────────┐      ┌──────────────────────┐           │
-│  │ SEROPOSITIVE RA         │      │ EROSIVE (95%)        │           │
-│  │ Confidence: 78%         │      │ Early RA detected    │           │
-│  │ Recommendation:         │      │ Recommend: Follow-up │           │
-│  │ → DMARD therapy         │      │                      │           │
-│  │ → Rheumatology referral │      │                      │           │
-│  └─────────────────────────┘      └──────────────────────┘           │
+│         Diagnosis Output                   X-ray Result                 │
+│  ┌─────────────────────────┐      ┌──────────────────────┐              │
+│  │ SEROPOSITIVE RA         │      │ EROSIVE (95%)        │              │
+│  │ Confidence: 78%         │      │ Early RA detected    │              │
+│  │ Recommendation:         │      │ Recommend: Follow-up │              │
+│  │ → DMARD therapy         │      │                      │              │
+│  │ → Rheumatology referral │      │                      │              │
+│  └─────────────────────────┘      └──────────────────────┘              │
 │                                                                         │
-│         Tab 3: Combined Results                                        │
-│         ┌──────────────────────────────────────┐                      │
-│         │ COMBINED RA ASSESSMENT               │                      │
-│         │ ✓ Blood markers: POSITIVE            │                      │
-│         │ ✓ X-ray: EROSIVE (Early disease)     │                      │
-│         │ ──────────────────────────────────   │                      │
-│         │ CONCLUSION: HIGH RA LIKELIHOOD       │                      │
-│         │ ACTION: Advanced treatment           │                      │
-│         └──────────────────────────────────────┘                      │
+│         Tab 3: Combined Results                                         │
+│         ┌──────────────────────────────────────┐                        │
+│         │ COMBINED RA ASSESSMENT               │                        │
+│         │ ✓ Blood markers: POSITIVE            │                        │
+│         │ ✓ X-ray: EROSIVE (Early disease)     │                        │
+│         │ ──────────────────────────────────   │                        │
+│         │ CONCLUSION: HIGH RA LIKELIHOOD       │                        │
+│         │ ACTION: Advanced treatment           │                        │
+│         └──────────────────────────────────────┘                        │
 │                                                                         │
 └─────────────────────────────────────────────────────────────────────────┘
 ```
