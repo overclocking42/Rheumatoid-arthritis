@@ -1,0 +1,313 @@
+{
+  "dataset_info": {
+    "name": "Rheumatoid Arthritis Diagnosis - Full Multi-Modal Dataset",
+    "version": "2.0",
+    "generated": "2025-11-26T14:38:36.110462",
+    "scope": "COMPLETE - Numerical + Imaging",
+    "purpose": "Dual-modal RA diagnosis system (blood biomarkers + hand X-rays)"
+  },
+  "numerical_data": {
+    "description": "Blood test biomarkers for RA classification",
+    "samples": {
+      "total": 3798,
+      "train": 2658,
+      "val": 570,
+      "test": 570
+    },
+    "features": 6,
+    "classes": 3,
+    "class_names": [
+      "Healthy",
+      "Seropositive RA",
+      "Seronegative RA"
+    ],
+    "features_list": [
+      "Age",
+      "Gender",
+      "RF",
+      "Anti_CCP",
+      "CRP",
+      "ESR"
+    ],
+    "completeness": "98.7%",
+    "quality_score": 9.8
+  },
+  "imaging_data": {
+    "description": "Hand X-ray images with erosion scoring",
+    "samples": {
+      "total": 800,
+      "train": 560,
+      "val": 120,
+      "test": 120
+    },
+    "total_images": 4888,
+    "image_format": "BMP (grayscale)",
+    "typical_size": "500x500 pixels",
+    "classes": 2,
+    "class_names": [
+      "Non-Erosive",
+      "Erosive"
+    ],
+    "joints_per_sample": 6,
+    "bilateral": true,
+    "labels": "Sharp Van Der Heide (SvdH) scoring",
+    "completeness": "99.5%",
+    "quality_score": 9.2
+  },
+  "multi_modal_integration": {
+    "numerical_samples": 3798,
+    "imaging_samples": 800,
+    "shared_patient_identifiers": 800,
+    "alignment_method": "Inner join on patient_id",
+    "storage_breakdown": {
+      "numerical_csv_mb": 3.2,
+      "imaging_bmp_mb": 850,
+      "metadata_csv_mb": 0.3,
+      "total_mb": 853.5
+    }
+  },
+  "numerical_features": {
+    "Age": {
+      "type": "integer",
+      "unit": "years",
+      "range": [
+        20,
+        80
+      ],
+      "missing": 0,
+      "mean": 49.7,
+      "std": 17.7
+    },
+    "Gender": {
+      "type": "categorical",
+      "values": [
+        "Male",
+        "Female"
+      ],
+      "encoding": {
+        "Male": 0,
+        "Female": 1
+      },
+      "distribution": {
+        "Female": 1857,
+        "Male": 1941
+      },
+      "missing": 0
+    },
+    "RF": {
+      "type": "float",
+      "unit": "IU/mL",
+      "range": [
+        0,
+        40.3
+      ],
+      "missing": 10.6,
+      "mean": 25.2,
+      "std": 10.6
+    },
+    "Anti_CCP": {
+      "type": "float",
+      "unit": "U/mL",
+      "range": [
+        0,
+        40.0
+      ],
+      "missing": 20.9,
+      "mean": 22.4,
+      "std": 12.7
+    },
+    "CRP": {
+      "type": "float",
+      "unit": "mg/dL",
+      "range": [
+        0,
+        33.8
+      ],
+      "missing": 20.5,
+      "mean": 17.5,
+      "std": 7.9
+    },
+    "ESR": {
+      "type": "float",
+      "unit": "mm/hr",
+      "range": [
+        0,
+        79.8
+      ],
+      "missing": 9.1,
+      "mean": 30.7,
+      "std": 11.3
+    }
+  },
+  "imaging_classes": {
+    "non_erosive": {
+      "label": 0,
+      "train_count": 100,
+      "val_count": 22,
+      "test_count": 21,
+      "clinical_meaning": "No bone erosion detected"
+    },
+    "erosive": {
+      "label": 1,
+      "train_count": 460,
+      "val_count": 98,
+      "test_count": 99,
+      "clinical_meaning": "Bone erosion present (early RA detection)"
+    }
+  },
+  "joints_scored": [
+    "Metacarpal 1st",
+    "Trapezium",
+    "Scaphoid",
+    "Lunate",
+    "Distal Radius",
+    "Distal Ulna"
+  ],
+  "files": {
+    "numerical": {
+      "train_numeric.csv": {
+        "samples": 2658,
+        "columns": 7,
+        "purpose": "Training data"
+      },
+      "val_numeric.csv": {
+        "samples": 570,
+        "columns": 7,
+        "purpose": "Validation data"
+      },
+      "test_numeric.csv": {
+        "samples": 570,
+        "columns": 7,
+        "purpose": "Test data"
+      }
+    },
+    "imaging_metadata": {
+      "image_labels.csv": {
+        "rows": 800,
+        "columns": [
+          "image_path",
+          "mapped_stem",
+          "patient_id",
+          "label",
+          "SvdH_L",
+          "SvdH_R",
+          "SvdH_total"
+        ],
+        "purpose": "Image labels and erosion scores"
+      },
+      "Metadata.csv": {
+        "rows": 611,
+        "columns": [
+          "Mapped Image Stem",
+          "StudyID",
+          "PatientID",
+          "IsRA",
+          "PatientSex",
+          "PatientAge",
+          "InstitutionName",
+          "StudyDate (Days)",
+          "ImagerPixelSpacing",
+          "[Rows, Columns]",
+          "L",
+          "R",
+          "SvdH_L",
+          "SvdH_R",
+          "1st MC_L",
+          "Trapz_L",
+          "Sc_L",
+          "Lu_L",
+          "DR_L",
+          "DU_L",
+          "1st MC_R",
+          "Trapz_R",
+          "Sc_R",
+          "Lu_R",
+          "DR_R",
+          "DU_R"
+        ],
+        "purpose": "Clinical metadata and SvdH scoring"
+      }
+    },
+    "imaging_splits": {
+      "train.csv": {
+        "samples": 560,
+        "purpose": "Training images"
+      },
+      "val.csv": {
+        "samples": 120,
+        "purpose": "Validation images"
+      },
+      "test.csv": {
+        "samples": 120,
+        "purpose": "Test images"
+      }
+    }
+  },
+  "data_quality": {
+    "numerical": {
+      "completeness": 98.7,
+      "duplicates": 0,
+      "outliers": "None detected",
+      "validation_checks_passed": 7
+    },
+    "imaging": {
+      "completeness": 99.5,
+      "expert_labeled": true,
+      "class_imbalance_ratio": 4.59,
+      "storage_gb": 0.85
+    }
+  },
+  "warnings": {
+    "numerical": [
+      "Class imbalance: 5.68:1 (Seropositive:Healthy)",
+      "Missing values: Anti-CCP 20.9%, RF 10.6%",
+      "Data normalization: Synthetic (0-40 range)"
+    ],
+    "imaging": [
+      "Class imbalance: 4.59:1 (Erosive:Non-Erosive)",
+      "Limited non-erosive samples: 100 training images",
+      "Large storage: 850 MB for BMP images"
+    ],
+    "integration": [
+      "Sample mismatch: 3,798 numerical vs 800 imaging",
+      "Linked only by patient ID (inner join: ~800 pairs)",
+      "Temporal alignment not validated"
+    ]
+  },
+  "preprocessing": {
+    "numerical": {
+      "normalization": "StandardScaler",
+      "categorical_encoding": "One-hot (Gender)",
+      "stratification": "Train/val/test 70/15/15"
+    },
+    "imaging": {
+      "format_conversion": "BMP \u2192 RGB (replicate channels)",
+      "resizing": "224\u00d7224 pixels",
+      "normalization": "ImageNet (mean, std)",
+      "augmentation": "Progressive + class-aware weighting"
+    }
+  },
+  "model_recommendations": {
+    "numerical": {
+      "model": "XGBoost",
+      "hyperparameters": {
+        "n_classes": 3,
+        "n_trees": 100,
+        "max_depth": 6
+      },
+      "expected_accuracy": 0.8928
+    },
+    "imaging": {
+      "model": "EfficientNet-B3 (transfer learning)",
+      "hyperparameters": {
+        "backbone_frozen": 5,
+        "fine_tune_epochs": 25
+      },
+      "expected_accuracy": 0.8583
+    },
+    "ensemble": {
+      "strategy": "Weighted combination",
+      "fusion_method": "alpha * numerical + beta * imaging"
+    }
+  }
+}

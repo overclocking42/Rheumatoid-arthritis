@@ -1,0 +1,260 @@
+{
+  "dataset_info": {
+    "name": "Rheumatoid Arthritis Diagnosis - Blood Biomarkers",
+    "version": "1.0",
+    "generated": "2025-11-23T00:33:02.139526",
+    "purpose": "Machine learning classification of RA diagnosis status using blood biomarkers",
+    "clinical_context": "Hospital blood test records for RA diagnosis support"
+  },
+  "data_summary": {
+    "total_samples": 3798,
+    "total_features": 6,
+    "total_classes": 3,
+    "samples_original": 3848,
+    "samples_valid": 3798,
+    "data_loss": "1.30%"
+  },
+  "splits": {
+    "train": {
+      "file": "train_numeric.csv",
+      "samples": 2658,
+      "percentage": "70.0%"
+    },
+    "validation": {
+      "file": "val_numeric.csv",
+      "samples": 570,
+      "percentage": "15.0%"
+    },
+    "test": {
+      "file": "test_numeric.csv",
+      "samples": 570,
+      "percentage": "15.0%"
+    }
+  },
+  "class_distribution": {
+    "label_mapping": {
+      "0": "Healthy",
+      "1": "Seropositive RA",
+      "2": "Seronegative RA"
+    },
+    "distribution": {
+      "healthy": {
+        "label": 0,
+        "count": 500,
+        "percentage": "13.2%",
+        "samples_train": 350,
+        "samples_val": 75,
+        "samples_test": 75
+      },
+      "seropositive": {
+        "label": 1,
+        "count": 2798,
+        "percentage": "73.7%",
+        "samples_train": 1958,
+        "samples_val": 420,
+        "samples_test": 420
+      },
+      "seronegative": {
+        "label": 2,
+        "count": 500,
+        "percentage": "13.2%",
+        "samples_train": 350,
+        "samples_val": 75,
+        "samples_test": 75
+      }
+    },
+    "imbalance_ratio": "5.68:1 (Seropositive:Healthy)"
+  },
+  "features": {
+    "Age": {
+      "description": "Patient age at time of blood test",
+      "data_type": "integer",
+      "unit": "years",
+      "clinical_role": "Risk factor, inflammatory response correlate",
+      "min": 20.0,
+      "max": 80.0,
+      "mean": 49.6882569773565,
+      "median": 50.0,
+      "std": 17.702549898694624,
+      "missing_count": 0,
+      "missing_percentage": 0.0,
+      "categorical": false
+    },
+    "Gender": {
+      "description": "Biological sex of patient",
+      "data_type": "categorical",
+      "unit": null,
+      "clinical_role": "RA prevalence higher in females",
+      "valid_values": [
+        "Male",
+        "Female"
+      ],
+      "encoding": {
+        "Male": 0,
+        "Female": 1
+      },
+      "distribution": {
+        "Female": 1857,
+        "Male": 1941
+      },
+      "missing_count": 0,
+      "missing_percentage": 0.0,
+      "categorical": true
+    },
+    "RF": {
+      "description": "Rheumatoid Factor - serum antibody level",
+      "data_type": "float",
+      "unit": "IU/mL",
+      "clinical_role": "Diagnostic marker for seropositive RA",
+      "clinical_cutoff": ">15 IU/mL indicates positive (seropositive RA)",
+      "min": 0.0,
+      "max": 40.2616144319926,
+      "mean": 25.179225084665376,
+      "median": 27.0,
+      "std": 10.562794896196587,
+      "q25": 21.2,
+      "q75": 33.3,
+      "missing_count": 404,
+      "missing_percentage": 10.637177461822011,
+      "categorical": false
+    },
+    "Anti_CCP": {
+      "description": "Anti-Cyclic Citrullinated Peptide antibody level",
+      "data_type": "float",
+      "unit": "U/mL",
+      "clinical_role": "Highly specific for RA (95%+), prognostic indicator",
+      "clinical_cutoff": ">20 U/mL indicates positive (RA specific)",
+      "min": 0.0,
+      "max": 40.0,
+      "mean": 22.424938948234434,
+      "median": 26.0,
+      "std": 12.670588085199647,
+      "q25": 9.21165682616122,
+      "q75": 32.9,
+      "missing_count": 795,
+      "missing_percentage": 20.932069510268562,
+      "categorical": false
+    },
+    "CRP": {
+      "description": "C-Reactive Protein - acute phase inflammatory marker",
+      "data_type": "float",
+      "unit": "mg/dL",
+      "clinical_role": "Inflammation marker, non-specific but indicative",
+      "clinical_cutoff": ">10 mg/dL indicates elevated inflammation",
+      "min": 0.0,
+      "max": 33.818877619275995,
+      "mean": 17.472235535735418,
+      "median": 18.2,
+      "std": 7.931899036576135,
+      "q25": 12.5,
+      "q75": 23.9,
+      "missing_count": 778,
+      "missing_percentage": 20.48446550816219,
+      "categorical": false
+    },
+    "ESR": {
+      "description": "Erythrocyte Sedimentation Rate - cumulative inflammation marker",
+      "data_type": "float",
+      "unit": "mm/hr",
+      "clinical_role": "Systemic inflammation indicator, complements CRP",
+      "clinical_cutoff": ">20 mm/hr indicates inflammation",
+      "min": 0.0,
+      "max": 79.79173510080959,
+      "mean": 30.712111877967374,
+      "median": 32.0,
+      "std": 11.258780442199045,
+      "q25": 27.0,
+      "q75": 38.0,
+      "missing_count": 344,
+      "missing_percentage": 9.057398630858346,
+      "categorical": false
+    }
+  },
+  "target": {
+    "name": "label",
+    "description": "RA diagnosis classification target",
+    "data_type": "integer",
+    "classes": {
+      "0": "Healthy (no RA)",
+      "1": "Seropositive RA (RF+ RA)",
+      "2": "Seronegative RA (RF- RA)"
+    }
+  },
+  "data_quality": {
+    "completeness": "89.8%",
+    "duplicates": 0,
+    "validation_status": "passed",
+    "notes": "All numeric features properly scaled. No outliers detected. Missing values are at random (MAR). XGBoost handles missing values natively."
+  },
+  "preprocessing_notes": {
+    "normalization": {
+      "method": "StandardScaler",
+      "applied_to": [
+        "Age",
+        "RF",
+        "Anti_CCP",
+        "CRP",
+        "ESR"
+      ],
+      "fit_on": "training set only"
+    },
+    "encoding": {
+      "categorical": "One-hot encoding for Gender (Male=0, Female=1)",
+      "critical_bug_fix": "Gender must be numeric before model inference (previously caused TypeError)"
+    },
+    "missing_values": {
+      "handling": "XGBoost tree-based structure handles missing values natively",
+      "imputation": "NOT applied - let model handle"
+    },
+    "stratification": "Train/Val/Test splits stratified to maintain class distribution"
+  },
+  "model_compatibility": {
+    "xgboost": {
+      "compatible": true,
+      "input_features": [
+        "Age",
+        "Gender",
+        "RF",
+        "Anti_CCP",
+        "CRP",
+        "ESR"
+      ],
+      "output_classes": 3,
+      "notes": "Gender must be numeric (0/1), not string"
+    },
+    "sklearn": {
+      "compatible": true,
+      "notes": "Compatible with all sklearn classifiers after preprocessing"
+    }
+  },
+  "files": {
+    "train_pool.csv": {
+      "samples": 3848,
+      "purpose": "Original complete dataset"
+    },
+    "train_numeric.csv": {
+      "samples": 2658,
+      "purpose": "Training set (70%)"
+    },
+    "val_numeric.csv": {
+      "samples": 570,
+      "purpose": "Validation set (15%)"
+    },
+    "test_numeric.csv": {
+      "samples": 570,
+      "purpose": "Test set (15%)"
+    },
+    "healthy.csv": {
+      "samples": 500,
+      "purpose": "Healthy class subset"
+    },
+    "seropositive.csv": {
+      "samples": 2848,
+      "purpose": "Seropositive class with extended features"
+    },
+    "seronegative.csv": {
+      "samples": 500,
+      "purpose": "Seronegative class subset"
+    }
+  }
+}

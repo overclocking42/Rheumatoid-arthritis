@@ -1,0 +1,30 @@
+{
+  "normalization": {
+    "method": "Dataset-based standardization",
+    "mean": 126.99880981445312,
+    "std": 74.72223663330078,
+    "formula": "(image - mean) / std",
+    "input_range": "0-255 (uint8)",
+    "output_range": "approximately -1 to 1"
+  },
+  "split_info": {
+    "train": {
+      "count": 560,
+      "percentage": "70.0%"
+    },
+    "val": {
+      "count": 120,
+      "percentage": "15.0%"
+    },
+    "test": {
+      "count": 120,
+      "percentage": "15.0%"
+    }
+  },
+  "image_specs": {
+    "format": "BMP (8-bit grayscale)",
+    "target_size": "224x224",
+    "dtype": "float32"
+  },
+  "timestamp": "2025-11-23T00:56:00.432796"
+}
