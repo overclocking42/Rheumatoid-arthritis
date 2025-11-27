@@ -16,7 +16,7 @@ license: bigscience-openrail-m
 Benchmark code is available in <https://github.com/maxQterminal/Rheumatoid-arthritis>.
 
 ## Download
-Please run the following command to download RAM-W600:
+Please run the following command to download RAM-W600 image data:
 
 ```bash
 git clone https://huggingface.co/datasets/TokyoTechMagicYang/RAM-W600
