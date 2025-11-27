@@ -23,7 +23,9 @@ git clone https://huggingface.co/datasets/TokyoTechMagicYang/RAM-W600
 ```
 
 Numerical Data: [data](https://github.com/maxQterminal/Rheumatoid-arthritis/data/numerical/numeric)
---------
+
+---
+
 
 
 **Four tabs**:
