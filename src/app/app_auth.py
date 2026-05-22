@@ -322,8 +322,6 @@ def init_session_state():
         st.session_state.show_ai_xray = False
     if 'gemini_api_key_input' not in st.session_state:
         st.session_state.gemini_api_key_input = ""
-    if 'groq_api_key_input' not in st.session_state:
-        st.session_state.groq_api_key_input = ""
     if 'ai_provider' not in st.session_state:
         st.session_state.ai_provider = "Auto"
     if 'ai_model_choice' not in st.session_state:
@@ -778,14 +776,9 @@ def get_ai_suggestions():
 
 
 def get_gemini_chat_model():
-    api_key = (
-        os.getenv('GOOGLE_API_KEY')
-        or st.session_state.get('gemini_api_key_input')
-        or GEMINI_API_KEY
-        or GEMINI_API_KEY_ALTERNATE
-    )
+    api_key = os.getenv('GOOGLE_API_KEY') or GEMINI_API_KEY or GEMINI_API_KEY_ALTERNATE
     if not api_key:
-        return None, "Gemini API key not found. Paste it in the Ask AI tab or export GOOGLE_API_KEY before starting Streamlit."
+        return None, "Gemini API key not found. Export GOOGLE_API_KEY in your shell before starting Streamlit."
 
     try:
         genai.configure(api_key=api_key)
@@ -800,14 +793,9 @@ def get_gemini_chat_model():
 def get_groq_client():
     if not GROQ_AVAILABLE:
         return None, "Groq SDK not installed. Run `pip install groq` or reinstall from requirements."
-
-    api_key = (
-        os.getenv('GROQ_API_KEY')
-        or st.session_state.get('groq_api_key_input')
-        or GROQ_API_KEY
-    )
+    api_key = os.getenv('GROQ_API_KEY') or GROQ_API_KEY
     if not api_key:
-        return None, "Groq API key not found. Paste it in the Ask AI tab or export GROQ_API_KEY before starting Streamlit."
+        return None, "Groq API key not found. Export GROQ_API_KEY in your shell before starting Streamlit."
 
     try:
         return Groq(api_key=api_key), None
@@ -1578,72 +1566,54 @@ else:
         st.subheader("Ask AI")
         st.markdown("*Ask simple questions about food, care, rest, daily routine, and what to do next.*")
 
-        with st.expander("AI setup", expanded=False):
-            st.markdown(
-                """
-                **Groq setup**
+        # with st.expander("AI setup", expanded=False):
+        #     st.markdown(
+        #         """
+        #         **Groq setup (preferred)**
 
-                1. Open [Groq Console](https://console.groq.com/keys).
-                2. Create or copy your API key.
-                3. Paste it in the `Groq API key` field below, or start the app with:
+        #         1. Sign up at Groq and create an API key in the Groq Console.
+        #         2. Export the key in your shell before starting Streamlit so the app can access it at runtime:
 
-                ```bash
-                export GROQ_API_KEY="paste-your-groq-key-here"
-                streamlit run src/app/app_auth.py
-                ```
+        #         ```bash
+        #         export GROQ_API_KEY="<your_groq_api_key_here>"
+        #         streamlit run src/app/app_auth.py
+        #         ```
 
-                **Gemini setup**
+        #         **Gemini (alternative)**
 
-                1. Open [Google AI Studio](https://aistudio.google.com/app/apikey).
-                2. Create an API key.
-                3. Paste it below, or start the app with:
+        #         1. Create an API key in Google AI Studio.
+        #         2. Export it as `GOOGLE_API_KEY` before starting Streamlit:
 
-                ```bash
-                export GOOGLE_API_KEY="paste-your-key-here"
-                streamlit run src/app/app_auth.py
-                ```
+        #         ```bash
+        #         export GOOGLE_API_KEY="<your_google_api_key_here>"
+        #         streamlit run src/app/app_auth.py
+        #         ```
 
-                Best practice: keep keys in environment variables, not inside code files.
-                """
-            )
+        #         Best practice: environment variables are ephemeral (they live for the shell session) and are safer than pasting keys into the web UI. If the app cannot find the key, it will show a clear error explaining how to export it.
+        #         """,
+        #     )
 
-        provider_col, model_col = st.columns(2)
-        with provider_col:
-            st.selectbox(
-                "AI provider",
-                ["Auto", "Groq", "Gemini"],
-                key="ai_provider",
-                help="Auto prefers Groq first, then Gemini.",
-            )
-        with model_col:
-            st.selectbox(
-                "Groq model",
-                ["llama-3.3-70b-versatile", "openai/gpt-oss-20b", "llama-3.1-8b-instant"],
-                key="ai_model_choice",
-                help="Used when Groq is selected or available in Auto mode.",
-            )
-
-        st.text_input(
-            "Groq API key",
-            type="password",
-            key="groq_api_key_input",
-            placeholder="Paste Groq API key here if you did not export GROQ_API_KEY",
-            help="This stays only in the current app session.",
-        )
-
-        st.text_input(
-            "Gemini API key",
-            type="password",
-            key="gemini_api_key_input",
-            placeholder="Paste Gemini API key here if you did not export GOOGLE_API_KEY",
-            help="This stays only in the current app session.",
-        )
+        # provider_col, model_col = st.columns(2)
+        # with provider_col:
+        #     st.selectbox(
+        #         "AI provider",
+        #         ["Auto", "Groq", "Gemini"],
+        #         key="ai_provider",
+        #         help="Auto prefers Groq first, then Gemini.",
+        #     )
+        # with model_col:
+        #     st.selectbox(
+        #         "Groq model",
+        #         ["llama-3.3-70b-versatile", "openai/gpt-oss-20b", "llama-3.1-8b-instant"],
+        #         key="ai_model_choice",
+        #         help="Used when Groq is selected or available in Auto mode.",
+        #     )
 
         provider_name, provider_error = get_ai_backend_status()
         if provider_error:
             st.warning(provider_error)
         else:
-            st.success(f"{provider_name} is connected and ready.")
+            st.success(f"AI is available to chat and assist.")
 
         st.markdown(
             f"""

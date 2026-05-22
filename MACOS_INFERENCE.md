@@ -51,6 +51,16 @@ export TRANSFORMERS_NO_TF=1
 streamlit run src/app/app_auth.py
 ```
 
+If you want to enable the conversational AI assistant (Groq), set your API key before running the app:
+
+```bash
+export GROQ_API_KEY="<your_groq_api_key_here>"
+export USE_TF=0
+export TRANSFORMERS_NO_TF=1
+streamlit run src/app/app_auth.py
+# or use a .env file in the project root with GROQ_API_KEY set
+```
+
 ## If you still want to test TensorFlow separately
 
 Keep it in a different virtual environment. Do not mix it into the PyTorch app environment.

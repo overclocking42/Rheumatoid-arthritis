@@ -28,10 +28,36 @@ pip install -r requirements.txt
 
 ### Run the Application
 ```bash
+export GROQ_API_KEY="<your_groq_api_key_here>"
 streamlit run src/app/app_auth.py
 ```
 
 **Access at**: http://localhost:8501
+
+### Conversational AI (Groq)
+
+The app uses the Groq SDK for the conversational "Ask AI" assistant. To enable it, set the `GROQ_API_KEY` environment variable before starting the app.
+
+1. Sign up at Groq and obtain an API key.
+2. Export the key in your shell or create a `.env` file in the project root (do NOT commit `.env`).
+
+macOS / Linux (zsh / bash):
+
+```bash
+export GROQ_API_KEY="<your_groq_api_key_here>"
+# then run the app
+streamlit run src/app/app_auth.py
+```
+
+Or create a `.env` file in the project root with this content:
+
+```
+GROQ_API_KEY=<your_groq_api_key_here>
+```
+
+The repository includes `.env.example` to show the required variable names. `.env` is ignored by `.gitignore`.
+
+If you prefer another provider, update `src/app/app_auth.py` and `src/app/config.py` to read the alternate variable name.
 
 ### macOS Apple Silicon Setup
 
@@ -56,6 +82,7 @@ cd /Users/joyboy/Documents/projects/Rheumatoid-Arthritis/Rheumatoid-arthritis
 source .venv-macos-infer/bin/activate
 export USE_TF=0
 export TRANSFORMERS_NO_TF=1
+export GROQ_API_KEY="<your_groq_api_key_here>"
 streamlit run src/app/app_auth.py
 ```
 
