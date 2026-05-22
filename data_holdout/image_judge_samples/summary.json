@@ -1,7 +1,0 @@
-{
-  "total_samples": 50,
-  "model": "EfficientNet-B3",
-  "test_roc_auc": 0.8918,
-  "test_macro_f1": 0.7205,
-  "description": "50 judge holdout samples for final evaluation"
-}

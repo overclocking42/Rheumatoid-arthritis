@@ -1,13 +1,16 @@
 torch
 torchvision
 torchaudio
+timm
+transformers
 xgboost
+catboost
 scikit-learn
 scipy
 pandas
 numpy
 Pillow
-opencv-python
+opencv-python-headless
 streamlit
 requests
 joblib
@@ -20,3 +23,6 @@ gunicorn
 black
 pylint
 pytest
+extra-streamlit-components
+google-generativeai
+groq

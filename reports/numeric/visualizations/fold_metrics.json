@@ -1,0 +1,136 @@
+{
+  "folds": {
+    "fold_1": {
+      "ANN": {
+        "acc": 91.04,
+        "f1": 96.55,
+        "recall": 96.3,
+        "precision": 96.8
+      },
+      "XGBoost": {
+        "acc": 90.0,
+        "f1": 90.32,
+        "recall": 90.0,
+        "precision": 90.65
+      },
+      "CatBoost": {
+        "acc": 90.33,
+        "f1": 90.34,
+        "recall": 90.33,
+        "precision": 90.35
+      }
+    },
+    "fold_2": {
+      "ANN": {
+        "acc": 91.33,
+        "f1": 96.72,
+        "recall": 96.55,
+        "precision": 96.88
+      },
+      "XGBoost": {
+        "acc": 91.33,
+        "f1": 91.43,
+        "recall": 91.33,
+        "precision": 91.54
+      },
+      "CatBoost": {
+        "acc": 91.0,
+        "f1": 90.98,
+        "recall": 91.0,
+        "precision": 90.95
+      }
+    },
+    "fold_3": {
+      "ANN": {
+        "acc": 91.04,
+        "f1": 96.55,
+        "recall": 96.3,
+        "precision": 96.8
+      },
+      "XGBoost": {
+        "acc": 89.33,
+        "f1": 89.55,
+        "recall": 89.33,
+        "precision": 89.77
+      },
+      "CatBoost": {
+        "acc": 89.67,
+        "f1": 89.68,
+        "recall": 89.67,
+        "precision": 89.7
+      }
+    },
+    "fold_4": {
+      "ANN": {
+        "acc": 91.67,
+        "f1": 96.77,
+        "recall": 96.62,
+        "precision": 96.92
+      },
+      "XGBoost": {
+        "acc": 90.67,
+        "f1": 90.85,
+        "recall": 90.67,
+        "precision": 91.04
+      },
+      "CatBoost": {
+        "acc": 90.67,
+        "f1": 90.68,
+        "recall": 90.67,
+        "precision": 90.7
+      }
+    },
+    "fold_5": {
+      "ANN": {
+        "acc": 91.19,
+        "f1": 96.63,
+        "recall": 96.48,
+        "precision": 96.79
+      },
+      "XGBoost": {
+        "acc": 90.67,
+        "f1": 90.85,
+        "recall": 90.67,
+        "precision": 91.04
+      },
+      "CatBoost": {
+        "acc": 90.67,
+        "f1": 90.65,
+        "recall": 90.67,
+        "precision": 90.62
+      }
+    }
+  },
+  "summary": {
+    "ANN": {
+      "mean_acc": 91.26,
+      "std_dev": 0.22,
+      "mean_f1": 96.59,
+      "mean_recall": 96.3,
+      "mean_precision": 96.88
+    },
+    "XGBoost": {
+      "mean_acc": 90.33,
+      "std_dev": 0.87,
+      "mean_f1": 90.43,
+      "mean_recall": 90.33,
+      "mean_precision": 90.54
+    },
+    "CatBoost": {
+      "mean_acc": 90.48,
+      "std_dev": 0.79,
+      "mean_f1": 90.44,
+      "mean_recall": 90.48,
+      "mean_precision": 90.39
+    }
+  },
+  "selected_model": {
+    "name": "ANN (Artificial Neural Network)",
+    "fold": 4,
+    "accuracy": 91.67,
+    "f1_score": 96.77,
+    "recall": 96.62,
+    "precision": 96.92,
+    "reason": "Best overall performance with highest accuracy, F1-score, and extreme stability"
+  }
+}

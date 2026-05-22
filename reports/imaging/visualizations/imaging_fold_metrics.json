@@ -1,0 +1,178 @@
+{
+  "fold_metrics": {
+    "ResNet50": {
+      "fold_1": {
+        "accuracy": 74.17,
+        "f1": 72.52,
+        "recall": 71.43,
+        "precision": 73.68
+      },
+      "fold_2": {
+        "accuracy": 73.33,
+        "f1": 72.0,
+        "recall": 70.59,
+        "precision": 73.53
+      },
+      "fold_3": {
+        "accuracy": 75.0,
+        "f1": 74.07,
+        "recall": 73.33,
+        "precision": 74.83
+      },
+      "fold_4": {
+        "accuracy": 74.17,
+        "f1": 71.43,
+        "recall": 69.23,
+        "precision": 73.91
+      },
+      "fold_5": {
+        "accuracy": 74.17,
+        "f1": 72.97,
+        "recall": 71.43,
+        "precision": 74.63
+      }
+    },
+    "DenseNet121": {
+      "fold_1": {
+        "accuracy": 81.67,
+        "f1": 82.94,
+        "recall": 81.67,
+        "precision": 84.45
+      },
+      "fold_2": {
+        "accuracy": 66.67,
+        "f1": 70.63,
+        "recall": 66.67,
+        "precision": 78.57
+      },
+      "fold_3": {
+        "accuracy": 75.83,
+        "f1": 78.18,
+        "recall": 75.83,
+        "precision": 80.65
+      },
+      "fold_4": {
+        "accuracy": 82.5,
+        "f1": 74.59,
+        "recall": 82.5,
+        "precision": 68.1
+      },
+      "fold_5": {
+        "accuracy": 78.33,
+        "f1": 80.37,
+        "recall": 78.33,
+        "precision": 82.27
+      }
+    },
+    "Swin Transformer": {
+      "fold_1": {
+        "accuracy": 85.0,
+        "f1": 91.51,
+        "recall": 97.98,
+        "precision": 86.05
+      },
+      "fold_2": {
+        "accuracy": 82.5,
+        "f1": 90.41,
+        "recall": 100.0,
+        "precision": 82.72
+      },
+      "fold_3": {
+        "accuracy": 80.83,
+        "f1": 87.43,
+        "recall": 80.81,
+        "precision": 94.29
+      },
+      "fold_4": {
+        "accuracy": 85.83,
+        "f1": 91.71,
+        "recall": 94.95,
+        "precision": 88.79
+      },
+      "fold_5": {
+        "accuracy": 83.33,
+        "f1": 90.83,
+        "recall": 100.0,
+        "precision": 83.78
+      }
+    }
+  },
+  "model_statistics": {
+    "ResNet50": {
+      "accuracy": {
+        "mean": 74.168,
+        "std": 0.5281060499558783
+      },
+      "f1_score": {
+        "mean": 72.598,
+        "std": 0.8981180323320498
+      },
+      "recall": {
+        "mean": 71.20200000000001,
+        "std": 1.3338425694211424
+      },
+      "precision": {
+        "mean": 74.11600000000001,
+        "std": 0.5195998460353864
+      },
+      "best_fold": {
+        "fold": 3,
+        "accuracy": 75.0
+      }
+    },
+    "DenseNet121": {
+      "accuracy": {
+        "mean": 77.0,
+        "std": 5.6904411076822505
+      },
+      "f1_score": {
+        "mean": 77.34200000000001,
+        "std": 4.332045244454403
+      },
+      "recall": {
+        "mean": 77.0,
+        "std": 5.6904411076822505
+      },
+      "precision": {
+        "mean": 78.80799999999999,
+        "std": 5.690843171270847
+      },
+      "best_fold": {
+        "fold": 4,
+        "accuracy": 82.5
+      }
+    },
+    "Swin Transformer": {
+      "accuracy": {
+        "mean": 83.49799999999999,
+        "std": 1.7797010984994082
+      },
+      "f1_score": {
+        "mean": 90.378,
+        "std": 1.5460711497211215
+      },
+      "recall": {
+        "mean": 94.748,
+        "std": 7.210013592220197
+      },
+      "precision": {
+        "mean": 87.126,
+        "std": 4.14386582794376
+      },
+      "best_fold": {
+        "fold": 4,
+        "accuracy": 85.83
+      }
+    }
+  },
+  "selected_model": {
+    "name": "Swin Transformer",
+    "fold": 4,
+    "accuracy": 85.83,
+    "f1_score": 91.71,
+    "recall": 94.95,
+    "precision": 88.79,
+    "checkpoint": "models/imaging/swin_results/checkpoints/swin_fold4_best.pth",
+    "reason": "Exceeds 85% target with best balance of all metrics"
+  }
+}
